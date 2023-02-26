@@ -46,6 +46,7 @@ let score = 50
 
 let gameObj = {}
 let placeholders = 6
+let hint_used = 0
 const localStorageGameKey = "HTA"
 
 
@@ -65,15 +66,30 @@ loadGame()
 
 function hideCards()
 {
-    for (let i = 0; i < placeholders/2; i++) {
+    hint_used = 1
+    for (let i = 0; i < Math.floor(placeholders/2); i++) {
         rand = Math.floor(Math.random() * (placeholders - 1)) + 1
         while (rand == aceId)
         {
             rand = Math.floor(Math.random() * (placeholders - 1)) + 1
         }
         cardclass = document.getElementById(rand)
-        document.getElementById('hideCards').innerText = rand
-        cardclass.style.visibility = 'hidden'
+        if (cardclass.style.visibility == 'hidden')
+        {
+            i = i - 1
+        }
+        else
+        {
+            cardclass.style.visibility = 'hidden'
+        }
+    }
+}
+
+function removeHideCards()
+{
+    for (let i = 0; i < placeholders; i++)
+    {
+        document.getElementById(i).style.visibility = 'visible'
     }
 }
 
@@ -127,26 +143,11 @@ function chooseCard(card)
 
 function calculateScoreToAdd(roundNum)
 {
-    if(roundNum == 1)
+    if (hint_used) 
     {
-        return 2
+        return 1.5
     }
-    else if(roundNum == 2)
-    {
-        return 2
-    }
-    else if(roundNum == 3)
-    {
-        return 2
-    }
-    else if(roundNum == 4)
-    {
-        return 2
-    }
-    else
-    {
-        return 2
-    }
+    return 2
 }
 
 function calculateScore()
@@ -246,6 +247,7 @@ function checkForIncompleteGame()
 }
 
 function startGame(){
+    removeHideCards()
     initializeNewGame()
     startRound()
 
