@@ -701,3 +701,13 @@ function saveGameObjectToLocalStorage(score,round)
     updateGameObject(score, round)
     updateLocalStorageItem(localStorageGameKey, getSerializedObjectAsJSON(gameObj))
 }
+
+
+// create a new footer element
+const footer = document.createElement("footer");
+
+// add content to the footer element
+footer.innerHTML = "Copyright © 2023 - Made with love at Hackher";
+
+// append the footer element to the body of the webpage
+document.body.appendChild(footer);
