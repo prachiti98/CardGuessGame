@@ -290,7 +290,7 @@ function checkForIncompleteGame()
         {
             if(confirm('Would you like to continue with your last game?'))
             {
-                earnings = gameObj.earnings
+                earnings = gameObj.score
                 roundNum = gameObj.round
             }
         }
