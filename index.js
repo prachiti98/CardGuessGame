@@ -702,6 +702,26 @@ function saveGameObjectToLocalStorage(score,round)
     updateLocalStorageItem(localStorageGameKey, getSerializedObjectAsJSON(gameObj))
 }
 
+// Get the modal container and the button that opens it
+const modal = document.getElementById('myModal');
+const btn = document.getElementById('myBtn');
+const closeBtn = document.getElementsByClassName('close')[0];
+
+// Add an event listener to the button that opens the modal
+btn.addEventListener('click', openModal);
+
+// Add an event listener to the close button in the modal
+closeBtn.addEventListener('click', closeModal);
+
+// Function to open the modal
+function openModal() {
+  modal.style.display = 'block';
+}
+
+// Function to close the modal
+function closeModal() {
+  modal.style.display = 'none';
+}
 
 // create a new footer element
 const footer = document.createElement("footer");
