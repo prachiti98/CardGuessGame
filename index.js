@@ -89,7 +89,8 @@ function removeHideCards()
 {
     for (let i = 0; i < placeholders; i++)
     {
-        document.getElementById(i).style.visibility = 'visible'
+        cardclass = document.getElementById(i)
+        cardclass.style.removeProperty('visibility')
     }
 }
 
@@ -247,10 +248,8 @@ function checkForIncompleteGame()
 }
 
 function startGame(){
-    removeHideCards()
     initializeNewGame()
     startRound()
-
 }
 function initializeNewGame(){
     score = 50
@@ -306,9 +305,9 @@ function addCardsToGridAreaCell(cellPositionClassName)
     const cellPositionElem = document.querySelector(cellPositionClassName)
 
     cards.forEach((card, index) =>{
+        card.style.removeProperty('visibility')
         addChildElement(cellPositionElem, card)
     })
-
 }
 
 function flipCard(card, flipToBack)
@@ -561,8 +560,7 @@ function createCard(cardItem){
     initializeCardPositions(cardElem)
 
     attatchClickEventHandlerToCard(cardElem)
-
-
+    
 }
 function attatchClickEventHandlerToCard(card){
     card.addEventListener('click', () => chooseCard(card))
