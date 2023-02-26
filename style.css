@@ -160,6 +160,33 @@ header{
     height:70px;
 }
 
+
+.hide-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000 !important;
+    width: 45px;
+    height: 45px;
+    border-radius: 100px;
+    position: absolute;
+    top: 260px;
+    left: 700px;
+    /*top: 25px;
+    right: 20px;*/
+}
+
+.hide-image{
+    width: 30px;
+    height: 30px;
+}
+
+.hide-button{
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
 /* CSS */
 #playGame {
   appearance: none;
