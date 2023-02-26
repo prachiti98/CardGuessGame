@@ -51,6 +51,15 @@ const localStorageGameKey = "HTA"
 
 const shuffleSound = document.getElementById('shuffle-sound');
 
+const incorrectSound = document.getElementById('incorrect-sound');
+incorrectSound.load();
+
+const correctSound = document.getElementById('correct-sound');
+correctSound.load();
+
+const victorySound = document.getElementById('victory');
+victorySound.load();
+
 /* <div class="card">
 <div class="card-inner">
     <div class="card-front">
@@ -99,7 +108,8 @@ function gameOver()
 {
     updateStatusElement(scoreContainerElem,"none")
     updateStatusElement(roundContainerElem,"none")
-    if(score > 400){
+    if(score > 100){
+        victorySound.play();
         const gameOverMessage = `CONGRATSS! You won :) Final Score - <span class = 'badge'>${score}</span> Click 'Play Game' button to play again`
         
         updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
@@ -188,10 +198,12 @@ function outputChoiceFeedBack(hit)
 {
     if(hit)
     {
+        correctSound.play();
         updateStatusElement(currentGameStatusElem, "block", winColor, "Hit!! - Well Done!! :)")
     }
     else
     {
+        incorrectSound.play();
         updateStatusElement(currentGameStatusElem, "block", loseColor, "Missed!! :(")
     }
 }
