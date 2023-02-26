@@ -14,6 +14,7 @@ const cardBackImgPath = 'images/card-back-blue.png'
 let cards = []
 
 const playGameButtonElem = document.getElementById('playGame')
+const hideButtonElem = document.getElementById('hideCardsDiv')
 
 const cardContainerElem = document.querySelector('.card-container')
 
@@ -224,6 +225,7 @@ function loadGame(){
     cardFlyInEffect()
 
     playGameButtonElem.addEventListener('click', ()=>startGame())
+    hideButtonElem.style.display = "none"
     document.getElementById('hideCards').addEventListener('click', ()=>hideCards())
 
     updateStatusElement(scoreContainerElem,"none")
@@ -354,7 +356,8 @@ function cardFlyInEffect()
         if(cardCount == numCards)
         {
             clearInterval(id)
-            playGameButtonElem.style.display = "inline-block"            
+            playGameButtonElem.style.display = "inline-block" 
+            hideButtonElem.style.display = "flex"
         }
         if(count == 1 || count == 250 || count == 500 || count == 750 || count == 1000 || count == 1250)
         {
