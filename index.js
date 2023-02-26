@@ -1,15 +1,15 @@
 
 const cardObjectDefinitions = [
-    {id:1, imagePath:'/images/KH.svg'},
-    {id:2, imagePath:'/images/JC.svg'},
-    {id:3, imagePath:'/images/QD.svg'},
-    {id:4, imagePath:'/images/AS.svg'},
-    {id:5, imagePath:'/images/QC.svg'},
-    {id:6, imagePath:'/images/KS.svg'}
+    {id:1, imagePath:'images/KH.svg'},
+    {id:2, imagePath:'images/JC.svg'},
+    {id:3, imagePath:'images/QD.svg'},
+    {id:4, imagePath:'images/AS.svg'},
+    {id:5, imagePath:'images/QC.svg'},
+    {id:6, imagePath:'images/KS.svg'}
 ]
 const aceId = 4
 
-const cardBackImgPath = '/images/card-back-blue.png'
+const cardBackImgPath = 'images/card-back-blue.png'
 
 let cards = []
 
@@ -45,17 +45,17 @@ let maxRounds = 5
 let score = 50
 
 let gameObj = {}
-
+let placeholders = 6
 const localStorageGameKey = "HTA"
 
 
 /* <div class="card">
 <div class="card-inner">
     <div class="card-front">
-        <img src="/images/card-JackClubs.png" alt="" class="card-img">
+        <img src="images/card-JackClubs.png" alt="" class="card-img">
     </div>
     <div class="card-back">
-        <img src="/images/card-back-Blue.png" alt="" class="card-img">
+        <img src="images/card-back-Blue.png" alt="" class="card-img">
     </div>
 </div>
 </div> */
@@ -63,6 +63,19 @@ const localStorageGameKey = "HTA"
 
 loadGame()
 
+function hideCards()
+{
+    for (let i = 0; i < placeholders/2; i++) {
+        rand = Math.floor(Math.random() * (placeholders - 1)) + 1
+        while (rand == aceId)
+        {
+            rand = Math.floor(Math.random() * (placeholders - 1)) + 1
+        }
+        cardclass = document.getElementById(rand)
+        document.getElementById('hideCards').innerText = rand
+        cardclass.style.visibility = 'hidden'
+    }
+}
 
 function gameOver()
 {
@@ -201,6 +214,7 @@ function loadGame(){
     cardFlyInEffect()
 
     playGameButtonElem.addEventListener('click', ()=>startGame())
+    document.getElementById('hideCards').addEventListener('click', ()=>hideCards())
 
     updateStatusElement(scoreContainerElem,"none")
     updateStatusElement(roundContainerElem,"none")
@@ -385,7 +399,7 @@ function shuffleCards()
        
         animateShuffle(shuffleCount)
        
-        if(shuffleCount == 500)
+        if(shuffleCount == 100)
         {
             clearInterval(id)
             shufflingInProgress = false
