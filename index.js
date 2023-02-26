@@ -200,7 +200,7 @@ function updateStatusElement(elem, display, color, innerHTML)
 
 }
 
-function outputChoiceFeedBack(hit)
+function outputChoiceFeedBack(hit,card)
 {
     if(hit)
     {
@@ -214,6 +214,7 @@ function outputChoiceFeedBack(hit)
         console.log(tryNum)
         tryNum = tryNum + 1;
         console.log(tryNum)
+        flipCard(card,false)
         updateStatusElement(currentGameStatusElem, "block", tryColor, "Oops, Don't worry! You can try again!!")
         chooseCard()
     }
@@ -230,11 +231,11 @@ function evaluateCardChoice(card)
     if(card.id == aceId)
     {
         updateScore()
-        outputChoiceFeedBack(true)
+        outputChoiceFeedBack(true,card)
     }
     else
     {
-        outputChoiceFeedBack(false)
+        outputChoiceFeedBack(false,card)
     }
 }
 
@@ -243,7 +244,15 @@ function canChooseCard()
     return gameInProgress == true && !shufflingInProgress && !cardsRevealed
 }
 
-
+function check_wager()
+{
+    text = document.getElementById("wager").value
+    if (text < 0 || text > 50)
+    {
+        console.log("Invalid bet")
+    }
+    else playGameButtonElem.style.removeProperty('pointer-events')
+}
 
 function loadGame(){
     createCards()
@@ -252,7 +261,10 @@ function loadGame(){
 
     cardFlyInEffect()
 
+    playGameButtonElem.style.setProperty('pointer-events','none')
     playGameButtonElem.addEventListener('click', ()=>startGame())
+    document.getElementById("wager").addEventListener('change', () => check_wager())
+    
     hideButtonElem.style.display = "none"
     betTextElem.style.display = "none"
     wagerDivElem.style.display = "none"
