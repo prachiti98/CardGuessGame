@@ -28,6 +28,9 @@ main{
     justify-content: center;
 
 }
+#audio {
+    display: none;
+}
 
 .card-container{
     position: relative;

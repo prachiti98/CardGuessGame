@@ -49,6 +49,7 @@ let placeholders = 6
 let hint_used = 0
 const localStorageGameKey = "HTA"
 
+const shuffleSound = document.getElementById('shuffle-sound');
 
 /* <div class="card">
 <div class="card-inner">
@@ -342,7 +343,7 @@ function flipCards(flipToBack){
 
 function cardFlyInEffect()
 {
-    const id = setInterval(flyIn, 1)
+    const id = setInterval(flyIn, 0.5)
     let cardCount = 0
 
     let count = 0
@@ -401,6 +402,14 @@ function shuffleCards()
     const id = setInterval(shuffle, 12)
 
 
+    shuffleSound.play();
+
+    setTimeout(() => {
+        shuffleSound.currentTime = 0;
+        shuffleSound.pause();
+      }, 1500);
+
+    
     function shuffle()
     {
         randomizeCardPositions()
