@@ -320,7 +320,7 @@ function flipCards(flipToBack){
 
 function cardFlyInEffect()
 {
-    const id = setInterval(flyIn, 5)
+    const id = setInterval(flyIn, 1)
     let cardCount = 0
 
     let count = 0
