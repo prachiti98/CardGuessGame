@@ -465,14 +465,14 @@ function returnGridAreasMappedToCardPos()
         {
             areas = areas + "f "
         }
-        if (index == 1)
+        if (index == 2)
         {
             firstPart = areas.substring(0, areas.length - 1)
-            areas = "";
+            
         }
-        else if (index == 3)
+        else if (index == 5)
         {
-            secondPart = areas.substring(0, areas.length - 1)
+            secondPart = areas.substring(6, 12)
         }
 
     })
