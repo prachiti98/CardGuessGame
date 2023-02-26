@@ -113,7 +113,7 @@ function gameOver()
     updateStatusElement(scoreContainerElem,"none")
     updateStatusElement(roundContainerElem,"none")
 
-    if(earnings > 0){
+    if(earnings > 400){
         victorySound.play();
         const gameOverMessage = `CONGRATS! You won - <span class = 'badge'>$${earnings}</span> <div>Click 'Play Game' button to play again</div>`
         updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
