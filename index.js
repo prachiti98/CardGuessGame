@@ -14,6 +14,7 @@ const cardBackImgPath = 'images/card-back-blue.png'
 let cards = []
 
 const playGameButtonElem = document.getElementById('playGame')
+const hideButtonElem = document.getElementById('hideCardsDiv')
 
 const cardContainerElem = document.querySelector('.card-container')
 
@@ -51,6 +52,15 @@ let earnings = 0
 const localStorageGameKey = "HTA"
 
 const shuffleSound = document.getElementById('shuffle-sound');
+
+const incorrectSound = document.getElementById('incorrect-sound');
+incorrectSound.load();
+
+const correctSound = document.getElementById('correct-sound');
+correctSound.load();
+
+const victorySound = document.getElementById('victory');
+victorySound.load();
 
 /* <div class="card">
 <div class="card-inner">
@@ -100,9 +110,10 @@ function gameOver()
 {
     updateStatusElement(scoreContainerElem,"none")
     updateStatusElement(roundContainerElem,"none")
+
     if(earnings > 0){
+        victorySound.play();
         const gameOverMessage = `CONGRATS! You won - <span class = 'badge'>$${earnings}</span> <div>Click 'Play Game' button to play again</div>`
-        
         updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
     }
     else{
@@ -188,10 +199,12 @@ function outputChoiceFeedBack(hit)
 {
     if(hit)
     {
+        correctSound.play();
         updateStatusElement(currentGameStatusElem, "block", winColor, "Hit!! - Well Done!! :)")
     }
     else
     {
+        incorrectSound.play();
         updateStatusElement(currentGameStatusElem, "block", loseColor, "Missed!! :(")
     }
 }
@@ -224,6 +237,7 @@ function loadGame(){
     cardFlyInEffect()
 
     playGameButtonElem.addEventListener('click', ()=>startGame())
+    hideButtonElem.style.display = "none"
     document.getElementById('hideCards').addEventListener('click', ()=>hideCards())
 
     updateStatusElement(scoreContainerElem,"none")
@@ -361,7 +375,8 @@ function cardFlyInEffect()
         if(cardCount == numCards)
         {
             clearInterval(id)
-            playGameButtonElem.style.display = "inline-block"            
+            playGameButtonElem.style.display = "inline-block" 
+            hideButtonElem.style.display = "flex"
         }
         if(count == 1 || count == 250 || count == 500 || count == 750 || count == 1000 || count == 1250)
         {

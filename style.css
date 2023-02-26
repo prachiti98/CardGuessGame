@@ -169,11 +169,15 @@ header{
     width: 45px;
     height: 45px;
     border-radius: 100px;
-    position: absolute;
-    top: 260px;
-    left: 700px;
-    /*top: 25px;
-    right: 20px;*/
+    right: 2%;
+    position: relative;
+
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+    animation: game-play-button-fade-in 5s 1;
 }
 
 .hide-image{
@@ -214,11 +218,15 @@ header{
   touch-action: manipulation;
   width: 100%;
   will-change: transform;
-  animation: game-play-button-fade-in 10s 1;
+  animation: game-play-button-fade-in 5s 1;
 }
 
 #playGame:disabled {
   pointer-events: none;
+}
+
+#hideCardsDiv:disabled{
+    pointer-events: none;
 }
 
 #playGame:hover {
@@ -231,6 +239,11 @@ header{
 #playGame:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+#hideCardsDiv:active {
+    box-shadow: none;
+    transform: translateY(0);
 }
 
 @keyframes game-play-button-fade-in{

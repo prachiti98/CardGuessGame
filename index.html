@@ -29,22 +29,33 @@
             </p>
         </div>
         <div class="header-button-container">
+            <div id = "hideCardsDiv" class="hide-button-container">
+                <button id = "hideCards" class="hide-button">
+                    <img class="hide-image" src = "images/hint.png">
+                </button>
+            </div>
             <div class="game-play-button-container">
                 <button id = "playGame" class="play-game">Play Game</button>
             </div>
         </div>
         <input id="wager"></input>
         <!--<button id = "hideCards">Hide cards</button> -->
-        <div class="hide-button-container">
-            <button id = "hideCards" class="hide-button">
-                <img class="hide-image" src = "images/hint.png">
-            </button>
-        </div>
+        
     </header>
     <main>
         <audio id="shuffle-sound">
             <source src="sounds/shuffle-card.wav" type="audio/wav">
         </audio>
+        <audio id="incorrect-sound" src="sounds/incorrect-card.wav">
+            
+        </audio>
+        <audio id="correct-sound" src="sounds/correct-card.wav">
+            
+        </audio>
+        <audio id="victory" src="sounds/victory.wav">
+            
+        </audio>
+        
         <div class="card-container">
             <div class="card-pos-a">
 
