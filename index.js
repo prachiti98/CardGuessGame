@@ -42,11 +42,12 @@ const primaryColor = "black"
 
 let roundNum = 0
 let maxRounds = 5
-let score = 50
 
 let gameObj = {}
 let placeholders = 6
 let hint_used = 0
+let wager = 0
+let earnings = 0
 const localStorageGameKey = "HTA"
 
 const shuffleSound = document.getElementById('shuffle-sound');
@@ -99,13 +100,13 @@ function gameOver()
 {
     updateStatusElement(scoreContainerElem,"none")
     updateStatusElement(roundContainerElem,"none")
-    if(score > 400){
-        const gameOverMessage = `CONGRATSS! You won :) Final Score - <span class = 'badge'>${score}</span> Click 'Play Game' button to play again`
+    if(earnings > 0){
+        const gameOverMessage = `CONGRATS! You won - <span class = 'badge'>$${earnings}</span> <div>Click 'Play Game' button to play again</div>`
         
         updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
     }
     else{
-        const gameOverMessage = `You lost!  Final Score - <span class = 'badge'>${score}</span> Click 'Play Game' button to try again`
+        const gameOverMessage = `Sorry, you lost! Better luck next time. Click 'Play Game' button to try again`
         
         updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
 
@@ -135,7 +136,7 @@ function chooseCard(card)
     if(canChooseCard())
     {
         evaluateCardChoice(card)
-        saveGameObjectToLocalStorage(score, roundNum)
+        saveGameObjectToLocalStorage(earnings, roundNum)
         flipCard(card,false)
 
         setTimeout(() => {
@@ -150,7 +151,7 @@ function chooseCard(card)
 
 }
 
-function calculateScoreToAdd(roundNum)
+function calculateMultiplier(roundNum)
 {
     if (hint_used) 
     {
@@ -161,15 +162,14 @@ function calculateScoreToAdd(roundNum)
 
 function calculateScore()
 {
-    const scoreToAdd = calculateScoreToAdd(roundNum)
-    score = score * scoreToAdd
+    multiplier = calculateMultiplier(roundNum)
+    earnings += wager * multiplier
 }
 
 function updateScore()
 {
     calculateScore()
-    updateStatusElement(scoreElem, "block", primaryColor, `Score <span class='badge'>${score}</span>`)
-
+    updateStatusElement(scoreElem, "block", primaryColor, `Earnings <span class='badge'>$${earnings}</span>`)
 }
 
 function updateStatusElement(elem, display, color, innerHTML)
@@ -246,7 +246,7 @@ function checkForIncompleteGame()
         {
             if(confirm('Would you like to continue with your last game?'))
             {
-                score = gameObj.score
+                earnings = gameObj.earnings
                 roundNum = gameObj.round
             }
         }
@@ -260,7 +260,7 @@ function startGame(){
     startRound()
 }
 function initializeNewGame(){
-    score = 50
+    earnings = 0
     roundNum = 0
 
     checkForIncompleteGame()
@@ -270,17 +270,24 @@ function initializeNewGame(){
     updateStatusElement(scoreContainerElem,"flex")
     updateStatusElement(roundContainerElem,"flex")
 
-    updateStatusElement(scoreElem,"block",primaryColor,`Score <span class='badge'>${score}</span>`)
+    updateStatusElement(scoreElem,"block",primaryColor,`Earnings <span class='badge'>$${earnings}</span>`)
     updateStatusElement(roundElem,"block",primaryColor,`Round <span class='badge'>${roundNum}</span>`)
 
 }
+
+function accept_wager()
+{
+    wager = document.getElementById('wager').value
+    console.log('wager'+wager)
+}
+
 function startRound()
 {
     initializeNewRound()
     collectCards()
     flipCards(true)
     shuffleCards()
-
+    accept_wager()
 }
 function initializeNewRound()
 {
