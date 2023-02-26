@@ -412,3 +412,7 @@ header{
     text-decoration: none;
     cursor: pointer;
   }
+
+  .myBtn {
+    margin: 50px;
+  }

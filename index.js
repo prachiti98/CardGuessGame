@@ -41,10 +41,13 @@ const roundElem = document.querySelector('.round')
 
 const winColor = "green"
 const loseColor = "red"
+const tryColor = "orange"
 const primaryColor = "black"
 
 let roundNum = 0
 let maxRounds = 5
+let tryNum = 0
+let maxtry =  1
 
 let gameObj = {}
 let placeholders = 6
@@ -203,11 +206,22 @@ function outputChoiceFeedBack(hit)
     {
         correctSound.play();
         updateStatusElement(currentGameStatusElem, "block", winColor, "Hit!! - Well Done!! :)")
+        tryNum = 0;
+    }
+    else if(hit == false && tryNum < maxtry)
+    {
+        incorrectSound.play();
+        console.log(tryNum)
+        tryNum = tryNum + 1;
+        console.log(tryNum)
+        updateStatusElement(currentGameStatusElem, "block", tryColor, "Oops, Don't worry! You can try again!!")
+        chooseCard()
     }
     else
     {
         incorrectSound.play();
         updateStatusElement(currentGameStatusElem, "block", loseColor, "Missed!! :(")
+        tryNum = 0;
     }
 }
 
