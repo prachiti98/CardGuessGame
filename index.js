@@ -98,10 +98,17 @@ function gameOver()
 {
     updateStatusElement(scoreContainerElem,"none")
     updateStatusElement(roundContainerElem,"none")
+    if(score > 400){
+        const gameOverMessage = `CONGRATSS! You won :) Final Score - <span class = 'badge'>${score}</span> Click 'Play Game' button to play again`
+        
+        updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
+    }
+    else{
+        const gameOverMessage = `You lost!  Final Score - <span class = 'badge'>${score}</span> Click 'Play Game' button to try again`
+        
+        updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
 
-    const gameOverMessage = `Game Over! Final Score - <span class = 'badge'>${score}</span> Click 'Play Game' button to play again`
-
-    updateStatusElement(currentGameStatusElem,"block",primaryColor,gameOverMessage)
+    }
 
     gameInProgress = false
     playGameButtonElem.disabled = false
