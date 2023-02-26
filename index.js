@@ -15,6 +15,8 @@ let cards = []
 
 const playGameButtonElem = document.getElementById('playGame')
 const hideButtonElem = document.getElementById('hideCardsDiv')
+const betTextElem = document.getElementById('betText')
+const wagerDivElem = document.getElementById('wagerDiv')
 
 const cardContainerElem = document.querySelector('.card-container')
 
@@ -238,6 +240,8 @@ function loadGame(){
 
     playGameButtonElem.addEventListener('click', ()=>startGame())
     hideButtonElem.style.display = "none"
+    betTextElem.style.display = "none"
+    wagerDivElem.style.display = "none"
     document.getElementById('hideCards').addEventListener('click', ()=>hideCards())
 
     updateStatusElement(scoreContainerElem,"none")
@@ -377,6 +381,8 @@ function cardFlyInEffect()
             clearInterval(id)
             playGameButtonElem.style.display = "inline-block" 
             hideButtonElem.style.display = "flex"
+            betTextElem.style.display = "flex"
+            wagerDivElem.style.display = "flex"
         }
         if(count == 1 || count == 250 || count == 500 || count == 750 || count == 1000 || count == 1250)
         {
